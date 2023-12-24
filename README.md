@@ -54,7 +54,9 @@ To run the application, you simply need to run the `app.py` script in this repos
 
 - **Database:** The application employs an Azure SQL Database as its database system to store order-related data.
 
-- **Containerisation** This application employs the use of Docker, to provde a container to move the application from one to another, regardless of operation system or platform. In order to recreate what was done to acheive this , the following was commited:
+## **Containerisation** 
+
+This application employs the use of Docker, to provde a container to move the application from one to another, regardless of operation system or platform. In order to recreate what was done to acheive this , the following was commited:
 1. Created a Dockerfile and with the required configuration against the application to hold and move. this includes stating to use:
     - Using python3.8 as the base image for docker to use
     - Copy all contents of the application into docker under a dicrectory as "/app".
@@ -68,6 +70,16 @@ To run the application, you simply need to run the `app.py` script in this repos
 
 2. Executed following command in command prompt to containerise the application: docker build -t aic-app:latest .
 3. Then, the following command in command prompt to test the build using : docker run -p 5000:5000 aic-app  
+
+## Infrastructure as code (IAC)
+This project utilises the use of Terraform to deplpy the containerised application onto a Azure Kubernetes Cluster to ensure application stability.
+
+### Networking 
+a module has been created to set up the rources needed to be deployed into Azure:
+- A resource Group - named aic-app-ntw-lo where all other components will be housed under.
+- A Virtual Network (Vnet) where the application and Kubernetes cluster will run from,
+- Control and work subnets within the Vnet.
+- A Network Security Group to manage access to and from this application with rules on ssh and 
 
 ## Contributors 
 
