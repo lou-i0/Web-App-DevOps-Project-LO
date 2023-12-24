@@ -54,9 +54,25 @@ To run the application, you simply need to run the `app.py` script in this repos
 
 - **Database:** The application employs an Azure SQL Database as its database system to store order-related data.
 
+- **Containerisation** This application employs the use of Docker, to provde a container to move the application from one to another, regardless of operation system or platform. In order to recreate what was done to acheive this , the following was commited:
+1. Created a Dockerfile and with the required configuration against the application to hold and move. this includes stating to use:
+    - Using python3.8 as the base image for docker to use
+    - Copy all contents of the application into docker under a dicrectory as "/app".
+    - Ensure both the app.py python file and the requirements file ( contains the dependant python libraries needed) are specified in the /app folder in docker.
+    - Run a set of command to use the debain linux OS as well as initalise the ODBC connection.
+    - Run pip install to get the updatetools library 
+    - Run pip install to get the libraries based on the requirements.txt text file. 
+    - Ensure that port 5000 is used to be able to access the application created. 
+    - Set the entrypoint to be python3 so docker recoginises the application to run from this environment. 
+    - Finally - upon running the docker build -  to launch the application. 
+
+2. Executed following command in command prompt to containerise the application: docker build -t aic-app:latest .
+3. Then, the following command in command prompt to test the build using : docker run -p 5000:5000 aic-app  
+
 ## Contributors 
 
 - [Maya Iuga]([https://github.com/yourusername](https://github.com/maya-a-iuga))
+- [Louis Othen]([https://github.com/lou-i0/Web-App-DevOps-Project-LO])
 
 ## License
 
