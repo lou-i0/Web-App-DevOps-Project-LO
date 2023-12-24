@@ -12,7 +12,8 @@ Welcome to the Web App DevOps Project repo! This application allows you to effic
 
 ## Features
 
-- **Order List:** View a comprehensive list of orders including details like date UUID, user ID, card number, store code, product code, product quantity, order date, and shipping date.
+- **Order List:** View a comprehensive list of orders including details like date UUID, user ID, card number, store code, product code, product quantity, order date, and shipping date. 
+as of 24/12/2023, a new feature has been added for delivery date. However, this has been removed for now ready for future releases. 
   
 ![Screenshot 2023-08-31 at 15 48 48](https://github.com/maya-a-iuga/Web-App-DevOps-Project/assets/104773240/3a3bae88-9224-4755-bf62-567beb7bf692)
 
