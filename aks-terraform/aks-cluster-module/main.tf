@@ -1,6 +1,8 @@
 # aks-cluster/main.tf
 # Create the AKS cluster
-
+module "ntwk_out" {
+  source = "../networking-module"
+}
 
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {

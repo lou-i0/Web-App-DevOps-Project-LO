@@ -1,12 +1,4 @@
 # aks-cluster/variables.tf
-module "ntwk_out" {
-  source = "../networking-module"
-
-  #define variables to use
-  
-}
-
-
 variable "aks_cluster_name" {
   type = string
   default = "lotest-aks-cluster"
