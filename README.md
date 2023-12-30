@@ -79,7 +79,9 @@ a module has been created to set up the rources needed to be deployed into Azure
 - A resource Group - named aic-app-ntw-lo where all other components will be housed under.
 - A Virtual Network (Vnet) where the application and Kubernetes cluster will run from,
 - Control and work subnets within the Vnet.
-- A Network Security Group to manage access to and from this application with rules on ssh and 
+- A Network Security Group to manage access to and from this application with rules on ssh and the lkubeapi server.
+- input variables include resource group name, cloud location, and vnet adress space.
+- out variables include vnet id, control and worker node id's, netwokring resoure group name, and networking security group id.
 
 ## Contributors 
 
