@@ -15,9 +15,10 @@ output "worker_node_subnet_id" {
   value       = azurerm_subnet.worker_node_subnet.id
 }
 
-output "networking_resource_group_name" {
+output "resource_group_name" {
   description = "Name of the Azure Resource Group for networking resources."
-  value       = azurerm_resource_group.networking.id
+  # value       = azurerm_resource_group.networking.ID
+  value = var.resource_group_name
 }
 
 # Define more output variables as needed...

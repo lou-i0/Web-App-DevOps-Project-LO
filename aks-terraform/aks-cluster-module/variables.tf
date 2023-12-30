@@ -60,3 +60,8 @@ variable "worker_node_subnet_id" {
   description = "if of the worker node set up in the networking module."
 
 }
+
+variable "aks_nsg_id" {
+  type        = string
+  description = "ID of the Network Security Group (NSG) for AKS."
+}

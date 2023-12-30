@@ -1,6 +1,6 @@
 # aks-cluster/main.tf
 # Create the AKS cluster
-module "ntwk_out" {
+module "networking" {
   source = "../networking-module"  
 }
 
