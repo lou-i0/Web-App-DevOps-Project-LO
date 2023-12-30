@@ -75,13 +75,22 @@ This application employs the use of Docker, to provde a container to move the ap
 This project utilises the use of Terraform to deplpy the containerised application onto a Azure Kubernetes Cluster to ensure application stability.
 
 ### Networking 
-a module has been created to set up the rources needed to be deployed into Azure:
+a module has been created to set up the resources needed to be deployed into Azure:
 - A resource Group - named aic-app-ntw-lo where all other components will be housed under.
 - A Virtual Network (Vnet) where the application and Kubernetes cluster will run from,
 - Control and work subnets within the Vnet.
 - A Network Security Group to manage access to and from this application with rules on ssh and the lkubeapi server.
 - input variables include resource group name, cloud location, and vnet adress space.
 - out variables include vnet id, control and worker node id's, netwokring resoure group name, and networking security group id.
+
+### aks-cluster
+a module has been create to set up the azure kubernetes cluster required to be set up in azure:
+- azurerm_kubernetes_cluster named aks-cluster.
+- a default_node_pool to configure said cluster.
+- and a the service principal details needed to access it.
+- variables declared for the cluster name, location, dns-prefix, the version of kuberenetes, service principal details.
+- additionally, varibles retrieved from the output of the netwokring module for vnet control and worker node ids as well as the resource group name to use.
+
 
 ## Contributors 
 

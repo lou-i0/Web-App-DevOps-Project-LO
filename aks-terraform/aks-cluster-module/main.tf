@@ -1,7 +1,7 @@
 # aks-cluster/main.tf
 # Create the AKS cluster
 module "ntwk_out" {
-  source = "../networking-module"
+  source = "../networking-module"  
 }
 
 
@@ -11,6 +11,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   resource_group_name = var.resource_group_name
   dns_prefix          = var.dns_prefix
   kubernetes_version  = var.kubernetes_version
+  
 
   default_node_pool {
     name       = "default"
