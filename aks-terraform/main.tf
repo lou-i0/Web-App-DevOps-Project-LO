@@ -19,10 +19,10 @@ terraform {
 provider "azurerm" {
   features {}
 
-  client_id       = "f55f9f4d-3e43-4b06-9687-c4e1f053bae3"
-  client_secret   = "StO8Q~yZbUWujjPQr.2qXk3Ovb.zPYBQlUh1gbko"
-  subscription_id = "7f552ba8-98a9-473e-961a-2b609be0c3d7"
-  tenant_id       = "47d4542c-f112-47f4-92c7-a838d8a5e8ef"
+  # client_id       = "f55f9f4d-3e43-4b06-9687-c4e1f053bae3"
+  # client_secret   = "StO8Q~yZbUWujjPQr.2qXk3Ovb.zPYBQlUh1gbko"
+  # subscription_id = "7f552ba8-98a9-473e-961a-2b609be0c3d7"
+  # tenant_id       = "47d4542c-f112-47f4-92c7-a838d8a5e8ef"
 }
 
 module "networking" {
@@ -41,8 +41,8 @@ module "aks_cluster" {
   cluster_location           = "UK South"
   dns_prefix                 = "myaks-project"
   kubernetes_version         = "1.27.7"  # Adjust the version as needed
-  service_principal_client_id = 
-  service_principal_client_secret = 
+  service_principal_client_id = "f55f9f4d-3e43-4b06-9687-c4e1f053bae3"
+  service_principal_client_secret = "StO8Q~yZbUWujjPQr.2qXk3Ovb.zPYBQlUh1gbko"
 
   # Input variables referencing outputs from the networking module
   resource_group_name         = module.networking.resource_group_name
