@@ -12,8 +12,8 @@ provider "azurerm" {
 
   # client_id       = 
   # client_secret   =  
-  # subscription_id = 
-  # tenant_id       = 
+  subscription_id = "7f552ba8-98a9-473e-961a-2b609be0c3d7"
+  tenant_id       = "47d4542c-f112-47f4-92c7-a838d8a5e8ef"
 }
 
 module "networking" {
