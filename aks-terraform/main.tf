@@ -1,3 +1,12 @@
+# in command prompt,  do this:
+# az login, login to your azure cloud
+# az account list --output table, displays info on subscriptions.
+# az ad sp create-for-rbac --name {terrsp} --role contributor --scopes /subscriptions/{sub-id}
+# az ad sp create-for-rbac --name terrsp --role contributor --scopes /subscriptions/5611fabc-0919-4aea-acbe-4aecceb80e4b
+# list displayname of service principal, az ad sp list --display-name terrsp --query "[0].appDisplayName"
+# to get service principal id (not appid!), az ad sp list --display-name terrsp --query "[0].id"
+# to reset crednetials of service principal, az ad sp credential reset --id <>
+
 terraform {
   required_providers {
     azurerm = {
@@ -10,8 +19,8 @@ terraform {
 provider "azurerm" {
   features {}
 
-  # client_id       = 
-  # client_secret   =  
+  client_id       = "f55f9f4d-3e43-4b06-9687-c4e1f053bae3"
+  client_secret   = "StO8Q~yZbUWujjPQr.2qXk3Ovb.zPYBQlUh1gbko"
   subscription_id = "7f552ba8-98a9-473e-961a-2b609be0c3d7"
   tenant_id       = "47d4542c-f112-47f4-92c7-a838d8a5e8ef"
 }
