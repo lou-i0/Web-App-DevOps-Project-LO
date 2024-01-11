@@ -148,7 +148,9 @@ for this to be achieved, below is a screenshot of the file application-manifests
 
 3. kubectl get pods: to check that pods have now been created for your deployment
 
-4. finally, to check the app is working as expected : kubectl port-forward flask-app-deployment-785dd4954-9bxvj 5000:5000 and then in your browser, go to : http://127.0.0.1:5000/ ( or equivelent based on setup), and test the web app and ensure everything is working as expected.
+4. finally, to check the app is working as expected : kubectl port-forward flask-app-deployment-785dd4954-9bxvj 5000:5000 and then in your browser, go to : http://127.0.0.1:5000/ ( or equivalent based on setup), and test the web app and ensure everything is working as expected.
+
+5. carry out some test including page navigation and button clicks, as well as adding a new order.
 
 
 ## Contributors 
