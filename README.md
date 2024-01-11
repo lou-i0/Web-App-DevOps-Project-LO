@@ -117,6 +117,9 @@ Once completed, got into the folder directory for the aks-0cluster module , open
 ### 3. apply configuration and deploy to azure.
 Lastly now the previous steps above are complete. under the main directory, open a termional, and type terraform apply. Enter yes once the review is done of the stuff to implment and hit enter. NOTE, for me at least i had to do this twice , as first time it failed saying there is no resource group in there, even though the resource group was created !? ( timing issue maybe). Re run this command again, and ( for me at least) this appears to work!
 
+### 4. get kube config credentials. 
+finally, we need to get the credentials of our kubernetes cluster created in order to access it later. to do this got to the terminal winodow and enter: az aks get-credentials --resource-group-name --name cluster-name 
+
 
 ## Contributors 
 
