@@ -7,8 +7,10 @@ Welcome to the Web App DevOps Project repo! This application allows you to effic
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Technology Stack](#technology-stack)
+- [**Containerisation**] (# **Containerisation** )
 - [Contributors](#contributors)
 - [License](#license)
+
 
 ## Features
 
@@ -119,6 +121,9 @@ Lastly now the previous steps above are complete. under the main directory, open
 
 ### 4. get kube config credentials. 
 finally, we need to get the credentials of our kubernetes cluster created in order to access it later. to do this got to the terminal winodow and enter: az aks get-credentials --resource-group-name --name cluster-name 
+
+## Kubernetes deployment of application
+Now that the terrform configuration has been completed to deploy a kubernetes cluster onto Microsoft Azure 
 
 
 ## Contributors 
