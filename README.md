@@ -7,7 +7,7 @@ Welcome to the Web App DevOps Project repo! This application allows you to effic
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Technology Stack](#technology-stack)
-- [**Containerisation**] (# **Containerisation** )
+- [**Containerisation**] (#Containerisation)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -56,7 +56,7 @@ To run the application, you simply need to run the `app.py` script in this repos
 
 - **Database:** The application employs an Azure SQL Database as its database system to store order-related data.
 
-## **Containerisation** 
+## Containerisation
 
 This application employs the use of Docker, to provde a container to move the application from one to another, regardless of operation system or platform. In order to recreate what was done to acheive this , the following was commited:
 1. Created a Dockerfile and with the required configuration against the application to hold and move. this includes stating to use:
