@@ -106,10 +106,16 @@ so the azure is looking at your subscription to AICORE only
 3. az ad sp create-for-rbac --name enter_name_here --role contributor --scopes /subscriptions/sub-id-here
 so that you create a service principal id and password . PLEASE NOTE!: you need to save the appid and password down, as is needed to be used within the Terraform configuration you have set up.
 
-Now this is completed, the next step is to initalise the relevant terraform folders before deployment.
+Now this is completed, the next step is to initialise the relevant terraform folders before deployment.
 
 ### 2. Initialising Terraform folders
-One last thing before deployment, we need to initialise the relevant folders in terrform, so the configuration is ready for deployment. Please follow the steps below:
+One last thing before deployment, we need to initialise the relevant folders in terraform, so the configuration is ready for deployment. Please follow the steps below:
+
+In the folder directory for the networking module , enter terraform init.
+Once completed, got into the folder directory for the aks-0cluster module , open a terminal there and type terraform init. Lastly, go into the directory above - where both directories are under - open a terminal , and enter terraform init. 
+
+### apply configuration and dpleoy to azure.
+Lastly now the previous steps above are complete. under the main directory, open a termional, and type terraform apply. Enter yes once the review is done of the stuff to implment and hit enter. NOTE, for me at least i had to do this twice , as first time it failed saying there is no resource group in there, even though the resource group was created !? ( timing issue maybe). Re run this command again, and ( for me at least) this appears to work!
 
 
 ## Contributors 
