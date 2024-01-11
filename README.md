@@ -8,6 +8,7 @@ Welcome to the Web App DevOps Project repo! This application allows you to effic
 - [Getting Started](#getting-started)
 - [Technology Stack](#technology-stack)
 - [Containerisation](#containerisation)
+- [Kubernetes deployment of application](#ckubernetes-deployment-of-application)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -139,6 +140,16 @@ Now that the terraform configuration has been completed to deploy a kubernetes c
 
 for this to be achieved, below is a screenshot of the file application-manifests.yaml:
  ![code to show for application-manifest.yaml](image.png)
+
+ Once code is created and saved, then use the following commands within the terminal ( ensure you are still connected to azure via az login):
+1. kubectl config get-contexts: to ensure you are looking / connected to the right context to apply the app deployment.
+
+2. kubectl apply -f application-manifest.yaml: to deploy said file, if successful, will read something similar to  -  "deployment.apps/flask-app-deployment created"
+
+3. kubectl get pods: to check that pods have now been created for your deployment
+
+4. finally, to check the app is working as expected : kubectl port-forward flask-app-deployment-785dd4954-9bxvj 5000:5000 and then in your browser, go to : http://127.0.0.1:5000/ ( or equivelent based on setup), and test the web app and ensure everything is working as expected.
+
 
 ## Contributors 
 
