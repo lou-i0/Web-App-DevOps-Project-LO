@@ -58,23 +58,23 @@ To run the application, you simply need to run the `app.py` script in this repos
 
 ## Containerisation
 
-This application employs the use of Docker, to provde a container to move the application from one to another, regardless of operation system or platform. In order to recreate what was done to acheive this , the following was commited:
+This application employs the use of Docker, to provide a container to move the application from one to another, regardless of operation system or platform. In order to recreate what was done to achieve this , the following was committed:
 1. Created a Dockerfile and with the required configuration against the application to hold and move. this includes stating to use:
     - Using python3.8 as the base image for docker to use
-    - Copy all contents of the application into docker under a dicrectory as "/app".
+    - Copy all contents of the application into docker under a directory as "/app".
     - Ensure both the app.py python file and the requirements file ( contains the dependant python libraries needed) are specified in the /app folder in docker.
-    - Run a set of command to use the debain linux OS as well as initalise the ODBC connection.
-    - Run pip install to get the updatetools library 
+    - Run a set of command to use the debian linux OS as well as initalise the ODBC connection.
+    - Run pip install to get the update tools library 
     - Run pip install to get the libraries based on the requirements.txt text file. 
     - Ensure that port 5000 is used to be able to access the application created. 
-    - Set the entrypoint to be python3 so docker recoginises the application to run from this environment. 
+    - Set the entrypoint to be python3 so docker recognises the application to run from this environment. 
     - Finally - upon running the docker build -  to launch the application. 
 
 2. Executed following command in command prompt to containerise the application: docker build -t aic-app:latest .
 3. Then, the following command in command prompt to test the build using : docker run -p 5000:5000 aic-app  
 
 ## Infrastructure as code (IAC)
-This project utilises the use of Terraform to deplpy the containerised application onto a Azure Kubernetes Cluster to ensure application stability.
+This project utilises the use of Terraform to deploy the containerised application onto a Azure Kubernetes Cluster to ensure application stability.
 
 ### Networking 
 a module has been created to set up the resources needed to be deployed into Azure:
@@ -83,21 +83,21 @@ a module has been created to set up the resources needed to be deployed into Azu
 - Control and work subnets within the Vnet.
 - A Network Security Group to manage access to and from this application with rules on ssh and the lkubeapi server.
 - input variables include resource group name, cloud location, and vnet adress space.
-- out variables include vnet id, control and worker node id's, netwokring resoure group name, and networking security group id.
+- out variables include vnet id, control and worker node id's, networking resource group name, and networking security group id.
 
 ### aks-cluster
 a module has been create to set up the azure kubernetes cluster required to be set up in azure:
 - azurerm_kubernetes_cluster named aks-cluster.
 - a default_node_pool to configure said cluster.
 - and a the service principal details needed to access it.
-- variables declared for the cluster name, location, dns-prefix, the version of kuberenetes, service principal details.
-- additionally, varibles retrieved from the output of the netwokring module for vnet control and worker node ids as well as the resource group name to use.
+- variables declared for the cluster name, location, dns-prefix, the version of kubernetes, service principal details.
+- additionally, variables retrieved from the output of the networking module for vnet control and worker node ids as well as the resource group name to use.
 
 ## when deploying iac to azure
-something to be aware of when your build is ready - with both networking and aks-cluster modules - set up. Azure may need some additional assitance before you deploy it ( especially in my case, as i have another azure subscription elsewhere).
+something to be aware of when your build is ready - with both networking and aks-cluster modules - set up. Azure may need some additional assistance before you deploy it ( especially in my case, as i have another azure subscription elsewhere).
 
 ### 1. Terminal commands 
-before we begin to dpleoy anything to azure , the following commands in the terminal need to be set ( i did the in terminal within the VScode terminal with my active folder open):
+before we begin to deploy anything to azure , the following commands in the terminal need to be set ( i did the in terminal within the VScode terminal with my active folder open):
 
 1. az login --tenant 47d4542c-f112-47f4-92c7-a838d8a5e8ef --allow-no-subscriptions
 This is so that you are logged into azure and pointing at the AICore tenant only
@@ -108,23 +108,37 @@ so the azure is looking at your subscription to AICORE only
 3. az ad sp create-for-rbac --name enter_name_here --role contributor --scopes /subscriptions/sub-id-here
 so that you create a service principal id and password . PLEASE NOTE!: you need to save the appid and password down, as is needed to be used within the Terraform configuration you have set up.
 
-Now this is completed, the next step is to initialise the relevant terraform folders before deployment.
+Now this is completed, the next step is to initalise the relevant terraform folders before deployment.
 
 ### 2. Initialising Terraform folders
-One last thing before deployment, we need to initialise the relevant folders in terraform, so the configuration is ready for deployment. Please follow the steps below:
+One last thing before deployment, we need to initalise the relevant folders in terraform, so the configuration is ready for deployment. Please follow the steps below:
 
 In the folder directory for the networking module , enter terraform init.
 Once completed, got into the folder directory for the aks-0cluster module , open a terminal there and type terraform init. Lastly, go into the directory above - where both directories are under - open a terminal , and enter terraform init. 
 
 ### 3. apply configuration and deploy to azure.
-Lastly now the previous steps above are complete. under the main directory, open a termional, and type terraform apply. Enter yes once the review is done of the stuff to implment and hit enter. NOTE, for me at least i had to do this twice , as first time it failed saying there is no resource group in there, even though the resource group was created !? ( timing issue maybe). Re run this command again, and ( for me at least) this appears to work!
+Lastly now the previous steps above are complete. under the main directory, open a terminal, and type terraform apply. Enter yes once the review is done of the stuff to implement and hit enter. NOTE, for me at least i had to do this twice , as first time it failed saying there is no resource group in there, even though the resource group was created !? ( timing issue maybe). Re run this command again, and ( for me at least) this appears to work!
 
 ### 4. get kube config credentials. 
-finally, we need to get the credentials of our kubernetes cluster created in order to access it later. to do this got to the terminal winodow and enter: az aks get-credentials --resource-group-name --name cluster-name 
+finally, we need to get the credentials of our kubernetes cluster created in order to access it later. to do this got to the terminal window and enter: az aks get-credentials --resource-group-name --name cluster-name 
 
 ## Kubernetes deployment of application
-Now that the terrform configuration has been completed to deploy a kubernetes cluster onto Microsoft Azure 
+Now that the terraform configuration has been completed to deploy a kubernetes cluster onto Microsoft Azure, we can can now deploy the app onto. For this to happen a yaml file is created called application-manifest.yaml. In this file are two sections of code:
 
+1. Section for the flask-app-deployment: to set up the app itself.
+    - Set up to run two replicas for scalability and high availability.
+    - Connected to previously created docker image where the app code resides.
+    - Exposed port 5000 for communications with the azure kubernetes cluster. 
+    - Implemented a Rolling update deployment strategy, for seamless application updates, with a maximum of one pod to deploy while one is unavailable.
+
+    
+2. Section for the flask-app-service: to set up the service for the app.
+    - Configure service to use TCP protocol via port 80 for internal communication with the cluster.
+    - Targetport to be house on 5000, corresponding to an example port exposed on the docker container.
+    - Set the service type to CLuster IP, to designate as an internal service to the azure kubernetes cluster.
+
+for this to be achieved, below is a screenshot of the file application-manifests.yaml:
+ ![code to show for application-manifest.yaml](image.png)
 
 ## Contributors 
 
