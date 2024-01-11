@@ -25,13 +25,15 @@ variable "kubernetes_version" {
 
 variable "service_principal_client_id" {
   type = string
-  default = "dc2fb98a-e0fb-4de0-879e-d817b2136d87"
+  
+  default = "b975074d-a973-4d61-b79c-511cc49260f9"
   description = "account id to interact with azure services."
 }
 
 variable "service_principal_client_secret" {
   type = string
-  default = "hfp8Q~.SzKkpgEPRMKS5ZIPfe0xsMipjwED3laLh"
+  
+  default = "Lcy8Q~D82uEkLdAi5IPV1rCg_YOyexwz5ZOfPaCJ"
   description = "password of service principal id."
 }
 
