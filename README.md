@@ -114,7 +114,7 @@ One last thing before deployment, we need to initialise the relevant folders in 
 In the folder directory for the networking module , enter terraform init.
 Once completed, got into the folder directory for the aks-0cluster module , open a terminal there and type terraform init. Lastly, go into the directory above - where both directories are under - open a terminal , and enter terraform init. 
 
-### apply configuration and dpleoy to azure.
+### 3. apply configuration and deploy to azure.
 Lastly now the previous steps above are complete. under the main directory, open a termional, and type terraform apply. Enter yes once the review is done of the stuff to implment and hit enter. NOTE, for me at least i had to do this twice , as first time it failed saying there is no resource group in there, even though the resource group was created !? ( timing issue maybe). Re run this command again, and ( for me at least) this appears to work!
 
 
