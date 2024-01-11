@@ -91,6 +91,26 @@ a module has been create to set up the azure kubernetes cluster required to be s
 - variables declared for the cluster name, location, dns-prefix, the version of kuberenetes, service principal details.
 - additionally, varibles retrieved from the output of the netwokring module for vnet control and worker node ids as well as the resource group name to use.
 
+## when deploying iac to azure
+something to be aware of when your build is ready - with both networking and aks-cluster modules - set up. Azure may need some additional assitance before you deploy it ( especially in my case, as i have another azure subscription elsewhere).
+
+### 1. Terminal commands 
+before we begin to dpleoy anything to azure , the following commands in the terminal need to be set ( i did the in terminal within the VScode terminal with my active folder open):
+
+1. az login --tenant 47d4542c-f112-47f4-92c7-a838d8a5e8ef --allow-no-subscriptions
+This is so that you are logged into azure and pointing at the AICore tenant only
+
+2. az account set --subscription sub-is-here
+so the azure is looking at your subscription to AICORE only 
+
+3. az ad sp create-for-rbac --name enter_name_here --role contributor --scopes /subscriptions/sub-id-here
+so that you create a service principal id and password . PLEASE NOTE!: you need to save the appid and password down, as is needed to be used within the Terraform configuration you have set up.
+
+Now this is completed, the next step is to initalise the relevant terraform folders before deployment.
+
+### 2. Initialising Terraform folders
+One last thing before deployment, we need to initialise the relevant folders in terrform, so the configuration is ready for deployment. Please follow the steps below:
+
 
 ## Contributors 
 
