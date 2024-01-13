@@ -152,7 +152,14 @@ for this to be achieved, below is a screenshot of the file application-manifests
 
 5. carry out some test including page navigation and button clicks, as well as adding a new order.
 
+## Automated Deployment into Azure DevOps
+Now that the application has now been deployed via the kubernetes cluster we set up previously, and tested the web app to ensure it is wokring as expected, the next step is to set up Continuous Integration / Continuous Deployment (CI/CD). To facilitate this, the following steps are to be taken :
 
+- Set up an organisation and poject within Azure DevOps.
+- Set up service connections for Docker hub and the Azure Kubernetes connection set up previously
+- Create and run the following pipeline, to set up CI/CD when any changes are made to the main branch:
+
+![Pipeline Code](image-1.png)
 ## Contributors 
 
 - [Maya Iuga]([https://github.com/yourusername](https://github.com/maya-a-iuga))
