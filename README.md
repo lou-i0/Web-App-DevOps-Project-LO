@@ -139,7 +139,7 @@ Now that the terraform configuration has been completed to deploy a kubernetes c
     - Set the service type to CLuster IP, to designate as an internal service to the azure kubernetes cluster.
 
 for this to be achieved, below is a screenshot of the file application-manifests.yaml:
- ![code to show for application-manifest.yaml](image.png)
+ ![code to show for application-manifest.yaml](application_manifest_code.png)
 
  Once code is created and saved, then use the following commands within the terminal ( ensure you are still connected to azure via az login):
 1. kubectl config get-contexts: to ensure you are looking / connected to the right context to apply the app deployment.
@@ -158,7 +158,7 @@ Now that the application has now been deployed via the kubernetes cluster we set
 - Set up an organisation and poject within Azure DevOps.
 - Set up service connections for Docker hub and the Azure Kubernetes connection set up previously
 - Create and run the following pipeline, to set up CI/CD when any changes are made to the main branch:
-![Pipeline Code](image-1.png)
+![Pipeline Code](pipeline_code.png)
 
 ## log Analytics configuration and alerts
 As all previous steps have been acomplished, now is the time to set up monitoring and alerts to be aware of the use of the kubernetes cluster as well alerting should limits. These Are :
@@ -173,6 +173,28 @@ As all previous steps have been acomplished, now is the time to set up monitorin
     - Set up an alert rule to trigger an alarm when the used disk percentage in the AKS cluster exceeds 90%. This alert is vital because it helps you proactively detect and address potential disk issues that could lead to performance degradation and service interruptions. The alert checks every 5 minutes and have a loopback period of 15 minutes. The alert is configured to send notifications to your email address, to determine what is the best strategy for responding to these alarms.
 
     - Adjust the alert rules for CPU usage and memory working set percentage to trigger when they exceed 80%. CPU and memory are critical resources in your AKS cluster. When they are heavily utilized, it can lead to decreased application performance. By setting alert rules to trigger at 80%, you ensure that you are notified when these resources are approaching critical levels.
+
+## Enable a key vault to store sensitive information on application code
+the previous sections all used hardcoded details in the application code regarding the server, database and username and password information in order for the web application. This is of course, not optimal from a security standpoint, there steps were taken to instead implement the use of a azure key vault, to store these sensitive values as secrets in the key vault, whilst still being able for use in the application. To achieve this, the following steps were taken:
+
+1. Set up a azure key vault and secrets:
+     - set up a key vault as a resource within your resource group.
+     - from there, create permission so that the relevant user is the key vault administrator. 
+     - then, add secrets within the key vault for the server, database, username and password.
+2. Enabled the aks cluster to have access to the key vault via a managed identity.
+    - Use the following code within a terminal (after az login): 
+        - az aks update -g aic-app-ntw-lo -n terraform-aks-cluster --enable-managed-identity
+        - az aks show --resource-group aic-app-ntw-lo --name terraform-aks-cluster --query identityProfile
+        - az role assignment create --role "Key Vault Secrets Officer" --assignee 589ad999-2c0c-4c2a-aeee-068be0b67691 --scope /subscriptions/7f552ba8-98a9-473e-961a-2b609be0c3d7/resourceGroups/aic-app-ntw-lo/providers/Microsoft.KeyVault/vaults/lotest-kv
+3. Updates application code and requirements document in the repository.
+     - Now, add in the libraries azure-keyvault and azure-identity both in the code and within the requirements document. 
+     - Replace the values currently in the application code, with the secret values.
+     - commit this back to the remote repository. 
+
+## DevOps Pipeline Architecture
+the following diagram below, represents the architecture behind what has been built, how they connect with one another and so on. 
+
+![Devops Pipeline Architecture Diagram](devops_pipeline_architecture.png)
 
 
 ## Contributors 
