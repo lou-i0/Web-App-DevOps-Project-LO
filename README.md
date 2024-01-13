@@ -82,8 +82,8 @@ a module has been created to set up the resources needed to be deployed into Azu
 - A resource Group - named aic-app-ntw-lo where all other components will be housed under.
 - A Virtual Network (Vnet) where the application and Kubernetes cluster will run from,
 - Control and work subnets within the Vnet.
-- A Network Security Group to manage access to and from this application with rules on ssh and the lkubeapi server.
-- input variables include resource group name, cloud location, and vnet adress space.
+- A Network Security Group to manage access to and from this application with rules on ssh and the kubeapi server.
+- input variables include resource group name, cloud location, and vnet address space.
 - out variables include vnet id, control and worker node id's, networking resource group name, and networking security group id.
 
 ### aks-cluster
@@ -135,7 +135,7 @@ Now that the terraform configuration has been completed to deploy a kubernetes c
     
 2. Section for the flask-app-service: to set up the service for the app.
     - Configure service to use TCP protocol via port 80 for internal communication with the cluster.
-    - Targetport to be house on 5000, corresponding to an example port exposed on the docker container.
+    - Target port to be house on 5000, corresponding to an example port exposed on the docker container.
     - Set the service type to CLuster IP, to designate as an internal service to the azure kubernetes cluster.
 
 for this to be achieved, below is a screenshot of the file application-manifests.yaml:
@@ -153,18 +153,18 @@ for this to be achieved, below is a screenshot of the file application-manifests
 5. carry out some test including page navigation and button clicks, as well as adding a new order.
 
 ## Automated Deployment into Azure DevOps
-Now that the application has now been deployed via the kubernetes cluster we set up previously, and tested the web app to ensure it is wokring as expected, the next step is to set up Continuous Integration / Continuous Deployment (CI/CD). To facilitate this, the following steps are to be taken :
+Now that the application has now been deployed via the kubernetes cluster we set up previously, and tested the web app to ensure it is working as expected, the next step is to set up Continuous Integration / Continuous Deployment (CI/CD). To facilitate this, the following steps are to be taken :
 
-- Set up an organisation and poject within Azure DevOps.
+- Set up an organisation and project within Azure DevOps.
 - Set up service connections for Docker hub and the Azure Kubernetes connection set up previously
 - Create and run the following pipeline, to set up CI/CD when any changes are made to the main branch:
 ![Pipeline Code](pipeline_code.png)
 
 ## log Analytics configuration and alerts
-As all previous steps have been acomplished, now is the time to set up monitoring and alerts to be aware of the use of the kubernetes cluster as well alerting should limits. These Are :
+As all previous steps have been accomplished, now is the time to set up monitoring and alerts to be aware of the use of the kubernetes cluster as well alerting should limits. These Are :
 
 - Enable Container insights for aks
-- Created the following metircs explorer charts:
+- Created the following metrics explorer charts:
     - Average Node CPU Usage: This chart allows you to track the CPU usage of your AKS cluster's nodes. Monitoring CPU usage helps ensure efficient resource allocation and detect potential performance issues.
     - Average Pod Count: This chart displays the average number of pods running in your AKS cluster. It's a key metric for evaluating the cluster's capacity and workload distribution.
     - Used Disk Percentage: Monitoring disk usage is critical to prevent storage-related issues. This chart helps you track how much disk space is being utilized.
