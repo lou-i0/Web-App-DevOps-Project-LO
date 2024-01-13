@@ -158,8 +158,23 @@ Now that the application has now been deployed via the kubernetes cluster we set
 - Set up an organisation and poject within Azure DevOps.
 - Set up service connections for Docker hub and the Azure Kubernetes connection set up previously
 - Create and run the following pipeline, to set up CI/CD when any changes are made to the main branch:
-
 ![Pipeline Code](image-1.png)
+
+## log Analytics configuration and alerts
+As all previous steps have been acomplished, now is the time to set up monitoring and alerts to be aware of the use of the kubernetes cluster as well alerting should limits. These Are :
+
+- Enable Container insights for aks
+- Created the following metircs explorer charts:
+    - Average Node CPU Usage: This chart allows you to track the CPU usage of your AKS cluster's nodes. Monitoring CPU usage helps ensure efficient resource allocation and detect potential performance issues.
+    - Average Pod Count: This chart displays the average number of pods running in your AKS cluster. It's a key metric for evaluating the cluster's capacity and workload distribution.
+    - Used Disk Percentage: Monitoring disk usage is critical to prevent storage-related issues. This chart helps you track how much disk space is being utilized.
+    - Bytes Read and Written per Second: Monitoring data I/O is crucial for identifying potential       performance bottlenecks. This chart provides insights into data transfer rates.
+- Set up Alerts:
+    - Set up an alert rule to trigger an alarm when the used disk percentage in the AKS cluster exceeds 90%. This alert is vital because it helps you proactively detect and address potential disk issues that could lead to performance degradation and service interruptions. The alert checks every 5 minutes and have a loopback period of 15 minutes. The alert is configured to send notifications to your email address, to determine what is the best strategy for responding to these alarms.
+
+    - Adjust the alert rules for CPU usage and memory working set percentage to trigger when they exceed 80%. CPU and memory are critical resources in your AKS cluster. When they are heavily utilized, it can lead to decreased application performance. By setting alert rules to trigger at 80%, you ensure that you are notified when these resources are approaching critical levels.
+
+
 ## Contributors 
 
 - [Maya Iuga]([https://github.com/yourusername](https://github.com/maya-a-iuga))
